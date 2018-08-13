@@ -27,6 +27,7 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecipeStepAdapter.Re
 
     private final RecipeStepListActivity mParentActivity;
     private final ArrayList<RecipeStep> mRecipeSteps;
+    private final String mRecipeName;
     private final boolean mTwoPane;
     private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
@@ -46,6 +47,7 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecipeStepAdapter.Re
                 Context context = view.getContext();
                 Intent intent = new Intent(context, RecipeStepDetailActivity.class);
                 intent.putExtra(RecipeStepDetailFragment.ARG_RECIPE_STEP, Parcels.wrap(step));
+                intent.putExtra(RecipeStepDetailActivity.EXTRA_RECIPE_NAME, mRecipeName);
 
                 context.startActivity(intent);
             }
@@ -54,8 +56,10 @@ public class RecipeStepAdapter extends RecyclerView.Adapter<RecipeStepAdapter.Re
 
     public RecipeStepAdapter(RecipeStepListActivity parent,
                              ArrayList<RecipeStep> recipeSteps,
+                             String recipeName,
                              boolean twoPane) {
         mRecipeSteps = recipeSteps;
+        mRecipeName = recipeName;
         mParentActivity = parent;
         mTwoPane = twoPane;
     }

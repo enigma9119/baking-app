@@ -22,21 +22,13 @@ import org.parceler.Parcels;
  */
 public class RecipeStepDetailActivity extends AppCompatActivity {
 
+    public static final String EXTRA_RECIPE_NAME = "recipe_name_extra";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipestep_detail);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-//        setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        setTitle(getIntent().getStringExtra(EXTRA_RECIPE_NAME));
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

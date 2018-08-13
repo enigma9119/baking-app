@@ -105,7 +105,7 @@ public class RecipeStepListActivity extends AppCompatActivity {
         ingredientsRecyclerView.setAdapter(new RecipeIngredientAdapter(mRecipe.getIngredients()));
 
         RecyclerView stepsRecyclerView = findViewById(R.id.recipe_step_list);
-        stepsRecyclerView.setAdapter(new RecipeStepAdapter(this, mRecipe.getRecipeSteps(), mTwoPane));
+        stepsRecyclerView.setAdapter(new RecipeStepAdapter(this, mRecipe.getRecipeSteps(), mRecipe.getName(), mTwoPane));
     }
 
     @Override
