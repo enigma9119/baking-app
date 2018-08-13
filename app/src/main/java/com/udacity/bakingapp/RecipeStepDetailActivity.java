@@ -10,6 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import com.udacity.bakingapp.model.RecipeStep;
+
+import org.parceler.Parcels;
+
 /**
  * An activity representing a single RecipeStep detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
@@ -46,11 +50,15 @@ public class RecipeStepDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(RecipeStepDetailFragment.ARG_RECIPE_STEP,
-                    getIntent().getStringExtra(RecipeStepDetailFragment.ARG_RECIPE_STEP));
             RecipeStepDetailFragment fragment = new RecipeStepDetailFragment();
+
+            // Get the recipe step from the previous activity and pass it to the detail fragment
+            Bundle arguments = new Bundle();
+            RecipeStep step = Parcels.unwrap(getIntent().getParcelableExtra(RecipeStepDetailFragment.ARG_RECIPE_STEP));
+            arguments.putParcelable(RecipeStepDetailFragment.ARG_RECIPE_STEP, Parcels.wrap(step));
+
             fragment.setArguments(arguments);
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.recipestep_detail_container, fragment)
                     .commit();

@@ -48,31 +48,37 @@ public class RecipeStepListActivity extends AppCompatActivity {
             // Get the recipe that will be displayed in this activity
             mRecipe = Parcels.unwrap(getIntent().getParcelableExtra(MainActivity.RECIPE_EXTRA));
 
-            final CollapsingToolbarLayout appBarLayout = findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mRecipe.getName());
+            // Detail container is only present in the tablet layout.
+            // Make sure this is not the tablet layout as the collapsing toolbar is not present there.
+            if (findViewById(R.id.recipestep_detail_container) == null) {
 
-                Picasso.get()
-                        .load(mRecipe.getImageUrl())
-                        .resize(1200, 530)
-                        .centerCrop()
-                        .into(new Target() {
-                            @Override
-                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                                // Load the recipe image into the collapsing toolbar
-                                appBarLayout.setBackground(new BitmapDrawable(getResources(), bitmap));
-                            }
+                final CollapsingToolbarLayout appBarLayout = findViewById(R.id.toolbar_layout);
 
-                            @Override
-                            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                if (appBarLayout != null) {
+                    appBarLayout.setTitle(mRecipe.getName());
 
-                            }
+                    Picasso.get()
+                            .load(mRecipe.getImageUrl())
+                            .resize(1200, 530)
+                            .centerCrop()
+                            .into(new Target() {
+                                @Override
+                                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                    // Load the recipe image into the collapsing toolbar
+                                    appBarLayout.setBackground(new BitmapDrawable(getResources(), bitmap));
+                                }
 
-                            @Override
-                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                                @Override
+                                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 
-                            }
-                        });
+                                }
+
+                                @Override
+                                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                                }
+                            });
+                }
             }
         }
 
